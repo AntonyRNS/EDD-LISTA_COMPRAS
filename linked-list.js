@@ -112,6 +112,7 @@ export class LinkedList {
         return -1
     }
 
+
     /**
      * Imprimir todos os nós até chegar no final da lista
      */
@@ -162,14 +163,28 @@ export class LinkedList {
             return;
         }
 
-        let atual = this.head;
-        while (atual && atual.next) {
-            if (atual.next.element && atual.next.element.id === id) {
-                atual.next = atual.next.next;
+        let current = this.head;
+        while (current && current.next) {
+            if (current.next.element && current.next.element.id === id) {
+                current.next = current.next.next;
                 this._size--;
                 return;
             }
-            atual = atual.next;
+            current = current.next;
         }
+    }
+    getById(id){
+        if (this.size() > 0) {
+            let pos = 0
+            let current = this.head
+            while (current.next !== null) {
+                if (current.element.id == id) {
+                    return element
+                }
+                pos++
+                current = current.next
+            }
+        }
+        return -1
     }
 }

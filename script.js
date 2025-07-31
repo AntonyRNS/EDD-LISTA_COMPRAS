@@ -1,27 +1,36 @@
 import { LinkedList } from './linked-list.js';
 import produtosLista from './populate.js';
-
 const container = document.getElementById("produtos");
 const carrinhoBtn = document.getElementById("toggleCarrinho");
 const carrinhoDiv = document.getElementById("carrinho");
 const listaCarrinho = document.getElementById("listaCarrinho");
 const carrinho = new LinkedList();
 
+
+
 function renderizarProdutos() {
-    const produtos = produtosLista.linkedListToArray();
-    produtos.forEach(produto => {
-        const card = document.createElement("div");
-        card.className = "card";
-        card.innerHTML = `
-      <img src="${produto.img}" alt="${produto.nome}">
-      <h3>${produto.nome}</h3>
-      <p>R$ ${produto.preco.toFixed(2)}</p>
-      <button data-id="${produto.id}">Adicionar ao Carrinho</button>
-    `;
-        container.appendChild(card);
+    while(!produtosLista.isEmpty()){
+
+    }
+
+
+
+
+
+    // const produtos = produtosLista.linkedListToArray();
+    // produtos.forEach(produto => {
+    //     const card = document.createElement("div");
+    //     card.className = "card";
+    //     card.innerHTML = `
+    //   <img src="${produto.img}" alt="${produto.nome}">
+    //   <h3>${produto.nome}</h3>
+    //   <p>R$ ${produto.preco.toFixed(2)}</p>
+    //   <button data-id="${produto.id}">Adicionar ao Carrinho</button>
+    // `;
+    //     container.appendChild(card);
     });
 
- 
+
     container.querySelectorAll("button").forEach(btn => {
         btn.addEventListener("click", () => {
             adicionarAoCarrinho(parseInt(btn.dataset.id));
@@ -32,7 +41,7 @@ function renderizarProdutos() {
 
 function adicionarAoCarrinho(id) {
     const produtos = produtosLista.linkedListToArray();
-    const produto = produtos.find(p => p.id === id);
+    const produto = produtos.getById();
     if (produto) {
         carrinho.append(produto);
         atualizarCarrinho();
@@ -43,7 +52,7 @@ function adicionarAoCarrinho(id) {
 
 
 function removerDoCarrinho(id) {
-    carrinho.removeById(id); 
+    carrinho.removeById(id);
     atualizarCarrinho();
 }
 
@@ -73,7 +82,6 @@ function atualizarCarrinho() {
         listaCarrinho.appendChild(card);
     });
 }
-
 
 
 
