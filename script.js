@@ -43,13 +43,10 @@ function adicionarAoCarrinho(id) {
 
 
 function removerDoCarrinho(id) {
-    const produtos = carrinho.linkedListToArray();
-    const produto = produtos.find(p => p.id === id);
-    if (produto) {
-        carrinho.remove(produto);
-        atualizarCarrinho();
-    }
+    carrinho.removeById(id); 
+    atualizarCarrinho();
 }
+
 
 
 function atualizarCarrinho() {

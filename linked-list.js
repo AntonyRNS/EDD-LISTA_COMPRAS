@@ -145,16 +145,31 @@ export class LinkedList {
         this._size = 0
     }
     linkedListToArray() {
-    let arr = [];
-    let current = this.head;
-    while (current !== null) {
-        arr.push(current.element);
-        current = current.next;
+        let arr = [];
+        let current = this.head;
+        while (current !== null) {
+            arr.push(current.element);
+            current = current.next;
+        }
+        return arr;
     }
-    return arr;
-}
 
+    removeById(id) {
+        if (!this.head) return;
+        if (this.head.element && this.head.element.id === id) {
+            this.head = this.head.next;
+            this._size--;
+            return;
+        }
 
-
-
+        let atual = this.head;
+        while (atual && atual.next) {
+            if (atual.next.element && atual.next.element.id === id) {
+                atual.next = atual.next.next;
+                this._size--;
+                return;
+            }
+            atual = atual.next;
+        }
+    }
 }
