@@ -7,20 +7,38 @@ const listaCarrinho = document.getElementById("listaCarrinho");
 const carrinho = new LinkedList();
 const FormProduto = document.getElementById("FormProduto");
 
-// FormProduto.addEventListener('click', AdicionarProduto)
+FormProduto.addEventListener('submit', adicionarProduto)
 
 
 
 
-function adicionarProduto(id) {
-    const produto = produtosLista.getById(id);
-    if (produto) {
-        carrinho.append(produto);
-        atualizarCarrinho();
-    } else {
-        console.warn("Produto não encontrado com id:", id);
+FormProduto.addEventListener('submit', adicionarProduto);
+
+function adicionarProduto(e) {
+    e.preventDefault();
+
+    const nome = document.getElementById("nome").value.trim();
+    const preco = parseFloat(document.getElementById("preco").value);
+
+    if (!nome || isNaN(preco)) {
+        alert("Preencha corretamente o nome e o preço.");
+        return;
     }
+
+    produtosLista.append({
+        id: produtosLista.lastIdPlusOne(),
+        nome,
+        preco,
+        img: "https://via.placeholder.com/150"
+    });
+
+    document.getElementById("nome").value = "";
+    document.getElementById("preco").value = "";
+
+    container.innerHTML = "";
+    renderizarProdutos();
 }
+
 
 
 
@@ -53,6 +71,7 @@ function renderizarProdutos() {
 
 function adicionarAoCarrinho(id) {
     const produto = produtosLista.getById(id);
+    console.log(produtosLista.lastIdPlusOne())
     if (!produto) {
         console.warn("Produto não encontrado com id:", id);
         return;

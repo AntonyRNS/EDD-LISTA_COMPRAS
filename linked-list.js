@@ -186,16 +186,19 @@ export class LinkedList {
 
 
     getLast() {
-        let current = this.head;
-        while (!this.isEmpty()) {
-            if (current.next === null) {
-                return current
-            }
+        if (this.isEmpty()) {
+            return null;
         }
-        return -1;
+
+        let current = this.head;
+        while (current.next !== null) {
+            current = current.next;
+        }
+        return current;
     }
+
     lastIdPlusOne() {
-        return this.getLast().id + 1
+        return this.getLast().element.id + 1
     }
 
 }
