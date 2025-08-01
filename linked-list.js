@@ -3,20 +3,17 @@ export class Node {
         this.element = element
         this.next = next
     }
-
     toString() {
         return this.next !== null
             ? this.element + " -> " + this.next.toString()
             : this.element
     }
 }
-
 export class LinkedList {
     constructor() {
         this.head = null
         this._size = 0
     }
-
     /**
      * Inserir um novo elemento no final da lista
      */
@@ -33,7 +30,6 @@ export class LinkedList {
         }
         this._size++
     }
-
     /**
      * Insere um elemento em uma dada posição
      */
@@ -52,14 +48,11 @@ export class LinkedList {
                 current = current.next
                 pos++
             }
-
             previous.next = node
             node.next = current
             this._size++
         }
-
     }
-
     /**
      * Remover um dado elemento
      */
@@ -69,7 +62,6 @@ export class LinkedList {
             this.removeAt(pos)
         }
     }
-
     /**
      * Remover um elemento dada uma posição
      */
@@ -93,7 +85,6 @@ export class LinkedList {
             this._size--
         }
     }
-
     /**
      * Informa a posição de um dado elemento na lista
      */
@@ -111,8 +102,6 @@ export class LinkedList {
         }
         return -1
     }
-
-
     /**
      * Imprimir todos os nós até chegar no final da lista
      */
@@ -123,7 +112,6 @@ export class LinkedList {
         return this.head.toString()
 
     }
-
     /**
      * Retornar a quantidade de elementos na lista
      */
@@ -154,15 +142,15 @@ export class LinkedList {
         }
         return arr;
     }
-
     removeById(id) {
-        if (!this.head) return;
+        if (!this.head){
+            return;
+        }
         if (this.head.element && this.head.element.id === id) {
             this.head = this.head.next;
             this._size--;
             return;
         }
-
         let current = this.head;
         while (current && current.next) {
             if (current.next.element && current.next.element.id === id) {
@@ -183,22 +171,17 @@ export class LinkedList {
         }
         return null;
     }
-
-
     getLast() {
         if (this.isEmpty()) {
             return null;
         }
-
         let current = this.head;
         while (current.next !== null) {
             current = current.next;
         }
         return current;
     }
-
     lastIdPlusOne() {
         return this.getLast().element.id + 1
     }
-
 }

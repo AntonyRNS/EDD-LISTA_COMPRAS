@@ -6,48 +6,31 @@ const carrinhoDiv = document.getElementById("carrinho");
 const listaCarrinho = document.getElementById("listaCarrinho");
 const carrinho = new LinkedList();
 const FormProduto = document.getElementById("FormProduto");
-
 FormProduto.addEventListener('submit', adicionarProduto)
-
-
-
-
 FormProduto.addEventListener('submit', adicionarProduto);
-
 function adicionarProduto(e) {
     e.preventDefault();
-
-    const nome = document.getElementById("nome").value.trim();
+    const nome = document.getElementById("nome").value;
     const preco = parseFloat(document.getElementById("preco").value);
-
     if (!nome || isNaN(preco)) {
         alert("Preencha corretamente o nome e o preço.");
         return;
     }
-
     produtosLista.append({
         id: produtosLista.lastIdPlusOne(),
         nome,
         preco,
         img: "https://via.placeholder.com/150"
     });
-
     document.getElementById("nome").value = "";
     document.getElementById("preco").value = "";
-
     container.innerHTML = "";
     renderizarProdutos();
 }
-
-
-
-
 function renderizarProdutos() {
     let current = produtosLista.head;
-
     while (current !== null) {
         const produto = current.element;
-
         const card = document.createElement("div");
         card.className = "card";
         card.innerHTML = `
@@ -57,18 +40,14 @@ function renderizarProdutos() {
           <button data-id="${produto.id}">Adicionar ao Carrinho</button>
         `;
         container.appendChild(card);
-
         current = current.next;
     }
-
     container.querySelectorAll("button").forEach(btn => {
         btn.addEventListener("click", () => {
             adicionarAoCarrinho(parseInt(btn.dataset.id));
         });
     });
 }
-
-
 function adicionarAoCarrinho(id) {
     const produto = produtosLista.getById(id);
     console.log(produtosLista.lastIdPlusOne())
@@ -79,26 +58,20 @@ function adicionarAoCarrinho(id) {
     carrinho.append(produto);
     atualizarCarrinho();
 }
-
-
 function removerDoCarrinho(id) {
     carrinho.removeById(id);
     atualizarCarrinho();
 }
-
 function atualizarCarrinho() {
     listaCarrinho.innerHTML = "";
     let current = carrinho.head;
-
     while (current !== null) {
         const produto = current.element;
-
         if (!produto) {
             console.warn("Nó inválido encontrado no carrinho, ignorando...");
             current = current.next;
             continue;
         }
-
         const card = document.createElement("div");
         card.className = "card cart-card";
         card.innerHTML = `
@@ -109,19 +82,13 @@ function atualizarCarrinho() {
                 <button data-id="${produto.id}" class="btn btn-remove">Remover</button>
             </div>
         `;
-
         card.querySelector("button").addEventListener("click", () => {
             removerDoCarrinho(produto.id);
         });
-
         listaCarrinho.appendChild(card);
-
         current = current.next;
     }
 }
-
-
-
 carrinhoBtn.addEventListener("click", () => {
     carrinhoDiv.classList.toggle("hidden");
 });
